@@ -20,7 +20,7 @@
     "eject": "react-scripts eject",
     "lint": "eslint ./src",
     "lint:fix": "eslint ./src --fix",
-    "format": "npx prettier --write ."
+    "format": "prettier --write ."
   },
   "eslintConfig": {
     "extends": [
@@ -59,7 +59,7 @@
     }
   },
   "lint-staged": {
-    "*.(js|jsx)": [
+    "*.js": [
       "npm run lint:fix",
       "git add"
     ]
