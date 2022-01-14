@@ -23,7 +23,7 @@ const Footer = function ({
     getFilteredItems: () => {},
     activeButtonClass: () => {},
   }
-
+  const unknown = Footer.elseToDo
   return (
     <footer className="footer">
       <span className="todo-count">{elseToDo} items left</span>
