@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const TaskList = function ({ filter, activeButtonClass }) {
+const TaskList = function taskfilter({ filter, activeButtonClass }) {
   TaskList.propTypes = {
     filter: PropTypes.func,
     activeButtonClass: PropTypes.func,

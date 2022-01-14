@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Task from './Task'
 
-const Tasklist = function ({
+const Tasklist = function tasklist ({
   toDoItem,
   onDestroyed,
   onToggleDone,

@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import TaskFilter from './tasks/TaskFilter'
 
-const Footer = function ({
+const Footer = function footer ({
   elseToDo,
   deleteComplited,
   filter,
@@ -23,7 +23,6 @@ const Footer = function ({
     getFilteredItems: () => {},
     activeButtonClass: () => {},
   }
-  const unknown = Footer.elseToDo
   return (
     <footer className="footer">
       <span className="todo-count">{elseToDo} items left</span>
