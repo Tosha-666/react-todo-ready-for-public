@@ -12,7 +12,7 @@ class Header extends React.Component {
 
   state = { value: '' }
 
-  addItem = this.props.addItem
+  addItem = this.props.
 
   onSubmiteForm = (e) => {
     e.preventDefault()
