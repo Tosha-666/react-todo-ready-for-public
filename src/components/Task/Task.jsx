@@ -1,7 +1,7 @@
 import React from 'react'
 import { formatDistanceToNow } from 'date-fns'
 import PropTypes from 'prop-types'
-import EditItem from './NewtaskForm'
+import EditItem from '../NewTaskForm/NewTaskForm'
 
 export default class Task extends React.Component {
   static defaultProps = {
@@ -74,6 +74,7 @@ export default class Task extends React.Component {
             <span className="created">created {daysBetween} ago</span>
           </label>
           <button
+            title='edit'
             type="button"
             className="icon icon-edit"
             onClick={onEdit}
@@ -83,6 +84,7 @@ export default class Task extends React.Component {
           </button>
 
           <button
+            title='destroy'
             type="button"
             className="icon icon-destroy"
             onClick={onDestroyed}

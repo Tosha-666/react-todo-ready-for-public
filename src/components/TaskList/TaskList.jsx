@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Task from './Task'
+import Task from '../Task/Task'
 
 const Tasklist = function tasklist ({
   toDoItem,
@@ -24,17 +24,22 @@ const Tasklist = function tasklist ({
     onToggleDone: PropTypes.func,
     editForm: PropTypes.func,
   }
-  const elements = toDoItem.map((item) => (
-    <Task
-      {...item}
-      key={item.id}
-      onDestroyed={() => onDestroyed(item.id)}
-      onToggleDone={() => onToggleDone(item.id)}
-      onEdit={() => onEdit(item.id)}
-      editForm={editForm}
-    />
-  ))
-  return <ul className="todo-list">{elements}</ul>
+
+  return <ul className="todo-list">{toDoItem.map((listEl) => (
+      <Task
+        date = {listEl.date}
+        label = {listEl.label}
+        done ={listEl.done}
+        checked={listEl.checked}
+        edit={listEl.edit}
+        key={listEl.id}
+        onDestroyed={() => onDestroyed(listEl.id)}
+        onToggleDone={() => onToggleDone(listEl.id)}
+        onEdit={() => onEdit(listEl.id)}
+        editForm={editForm}
+      />
+    ))}
+    </ul>
 }
 
 export default Tasklist

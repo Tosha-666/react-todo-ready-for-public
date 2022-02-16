@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import TaskFilter from './tasks/TaskFilter'
+import TaskFilter from '../TaskFilter/TaskFilter'
 
-const Footer = function footer ({
+const Footer = function footer({
   elseToDo,
   deleteComplited,
   filter,

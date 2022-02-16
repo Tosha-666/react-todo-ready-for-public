@@ -1,9 +1,9 @@
 /* eslint-disable react/destructuring-assignment */
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Header from './header'
-import Tasklist from './tasks/TaskList'
-import Footer from './Footer'
+import Header from './components/Header'
+import Footer from './components/Footer'
+import Tasklist from './components/TaskList'
 
 class App extends React.Component {
   maxId = 100
@@ -43,19 +43,37 @@ class App extends React.Component {
   }
 
   editForm = (text) => {
-    this.setState(({ toDoData }) => {
-      const editId = toDoData.findIndex((el) => el.edit)
-      let newEditId = toDoData[editId]
-      newEditId = { ...newEditId, label: text, edit: false }
-      const newArr = [
-        ...toDoData.slice(0, editId),
-        newEditId,
-        ...toDoData.slice(editId + 1),
-      ]
-      return {
-        toDoData: newArr,
-      }
-    })
+    if (text.trim() !== '') {
+      this.setState(({ toDoData }) => {
+        const editId = toDoData.findIndex((el) => el.edit)
+        let newEditId = toDoData[editId]
+
+        newEditId = { ...newEditId, label: text.trim(), edit: false }
+        const newArr = [
+          ...toDoData.slice(0, editId),
+          newEditId,
+          ...toDoData.slice(editId + 1),
+        ]
+        return {
+          toDoData: newArr,
+        }
+      })
+    } else {
+      this.setState(({ toDoData }) => {
+        const editId = toDoData.findIndex((el) => el.edit)
+        let newEditId = toDoData[editId]
+
+        newEditId = { ...newEditId, edit: false }
+        const newArr = [
+          ...toDoData.slice(0, editId),
+          newEditId,
+          ...toDoData.slice(editId + 1),
+        ]
+        return {
+          toDoData: newArr,
+        }
+      })
+    }
   }
 
   onEdit = (id) => {

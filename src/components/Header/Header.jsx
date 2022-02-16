@@ -16,7 +16,12 @@ class Header extends React.Component {
 
   onSubmiteForm = (e) => {
     e.preventDefault()
-    this.addItem(this.state.value)
+    if (this.state.value.trim() !== '') {
+      this.addItem(this.state.value.trim())
+      this.setState({
+        value: '',
+      })
+    }
     this.setState({
       value: '',
     })
@@ -34,13 +39,15 @@ class Header extends React.Component {
       <header className="header">
         <form className="header-form" onSubmit={this.onSubmiteForm}>
           <h1>todos</h1>
-          <input
-            className="new-todo"
-            placeholder="What needs to be done?"
-            autoFocus
-            value={value}
-            onChange={this.onLabelChange}
-          />
+          <label>
+            <input
+              className="new-todo"
+              placeholder="What needs to be done?"
+              autoFocus
+              value={value}
+              onChange={this.onLabelChange}
+            />
+          </label>
         </form>
       </header>
     )

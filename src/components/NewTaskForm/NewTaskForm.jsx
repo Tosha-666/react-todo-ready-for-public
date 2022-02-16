@@ -33,12 +33,15 @@ export default class EditItem extends React.Component {
     const { value } = this.state
     return (
       <form onSubmit={this.onSubmiteForm}>
-        <input
-          type="text"
-          className="edit"
-          value={value}
-          onChange={this.onLabelChange}
-        />
+        <label>
+          <input
+            type="text"
+            className="edit"
+            value={value}
+            onChange={this.onLabelChange}
+            autoFocus
+          />
+        </label>
       </form>
     )
   }
