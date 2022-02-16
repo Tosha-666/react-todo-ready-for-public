@@ -74,7 +74,7 @@ export default class Task extends React.Component {
             <span className="created">created {daysBetween} ago</span>
           </label>
           <button
-            title='edit'
+            title="edit"
             type="button"
             className="icon icon-edit"
             onClick={onEdit}
@@ -84,7 +84,7 @@ export default class Task extends React.Component {
           </button>
 
           <button
-            title='destroy'
+            title="destroy"
             type="button"
             className="icon icon-destroy"
             onClick={onDestroyed}
