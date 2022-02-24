@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import TaskFilter from '../TaskFilter/TaskFilter'
+import {TaskFilter} from '../TaskFilter'
 
 const Footer = function footer({
   elseToDo,

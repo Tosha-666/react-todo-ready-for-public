@@ -1,7 +1,7 @@
 import React from 'react'
 import { formatDistanceToNow } from 'date-fns'
 import PropTypes from 'prop-types'
-import EditItem from '../NewTaskForm/NewTaskForm'
+import {NewTaskForm} from '../NewTaskForm'
 
 export default class Task extends React.Component {
   static defaultProps = {
@@ -55,7 +55,8 @@ export default class Task extends React.Component {
     return (
       <li className={classNames()}>
         <div className="view">
-          <input
+
+          <input   // label
             className="toggle"
             type="checkbox"
             checked={checked}
@@ -92,7 +93,7 @@ export default class Task extends React.Component {
             {' '}
           </button>
         </div>
-        {edit && <EditItem editForm={editForm} label={label} />}
+        {edit && <NewTaskForm editForm={editForm} label={label} />}
       </li>
     )
   }

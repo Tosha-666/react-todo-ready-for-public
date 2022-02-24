@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-export default class EditItem extends React.Component {
+export default class NewTaskForm extends React.Component {
   static defaultProps = {
     editForm: () => {},
     label: () => {},
