@@ -161,6 +161,24 @@ body {
   border-bottom: 1px solid #ededed;
 }
 
+.todo-list li .timer-stop:before{
+content: '\25FC';
+color: #af5b5e;
+cursor: pointer;
+}
+
+.todo-list li .timer-start:before{
+  content: '\25B6';
+  color: #af5b5e;
+  cursor: pointer;
+}
+
+.todo-list li .timer-pause:before{
+  content: '\2225';
+  color: #af5b5e;
+  cursor: pointer;
+}
+
 .todo-list li:last-child {
   border-bottom: none;
 }
