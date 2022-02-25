@@ -32,7 +32,7 @@ const Tasklist = function tasklist({
           date={listEl.date}
           label={listEl.label}
           done={listEl.done}
-          checked={listEl.checked}
+          // checked={listEl.checked}
           edit={listEl.edit}
           key={listEl.id}
           onDestroyed={() => onDestroyed(listEl.id)}

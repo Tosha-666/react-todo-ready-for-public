@@ -10,7 +10,6 @@ export default class Task extends React.Component {
     onDestroyed: () => {},
     onToggleDone: () => {},
     done: false,
-    checked: false,
     edit: false,
     onEdit: () => {},
     editForm: () => {},
@@ -22,7 +21,6 @@ export default class Task extends React.Component {
     onDestroyed: PropTypes.func,
     onToggleDone: PropTypes.func,
     done: PropTypes.bool,
-    checked: PropTypes.bool,
     edit: PropTypes.bool,
     onEdit: PropTypes.func,
     editForm: PropTypes.func,
@@ -35,7 +33,7 @@ export default class Task extends React.Component {
       onDestroyed,
       onToggleDone,
       done,
-      checked,
+      // checked,
       edit,
       onEdit,
       editForm,
@@ -59,7 +57,7 @@ export default class Task extends React.Component {
           <input   // label
             className="toggle"
             type="checkbox"
-            checked={checked}
+            checked={done}
             onChange={onToggleDone}
           />
           <label>

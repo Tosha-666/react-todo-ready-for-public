@@ -28,7 +28,6 @@ export default class App extends React.Component {
       id: this.maxId++,
       date: new Date(),
       done: false,
-      checked: false,
       edit: false,
     }
 
@@ -98,7 +97,6 @@ export default class App extends React.Component {
       const newItem = {
         ...oldItem,
         done: !oldItem.done,
-        checked: !oldItem.checked,
       }
       const newArr = [
         ...toDoData.slice(0, doneId),
@@ -122,6 +120,8 @@ export default class App extends React.Component {
     this.setState({ filter })
   }
 
+
+  
   getFilteredItems = (item) => {  // !!!!!!!!!!!!
     switch (this.state.filter) {
       case 'all':
