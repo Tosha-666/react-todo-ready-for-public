@@ -1,8 +1,9 @@
 import React from 'react'
 import { formatDistanceToNow } from 'date-fns'
 import PropTypes from 'prop-types'
-import EditItem from '../NewTaskForm/NewTaskForm'
+import {NewTaskForm} from '../NewTaskForm'
 import Timer from '../Timer'
+
 
 export default class Task extends React.Component {
   static defaultProps = {
@@ -11,7 +12,6 @@ export default class Task extends React.Component {
     onDestroyed: () => {},
     onToggleDone: () => {},
     done: false,
-    checked: false,
     edit: false,
     onEdit: () => {},
     editForm: () => {},
@@ -23,25 +23,24 @@ export default class Task extends React.Component {
     onDestroyed: PropTypes.func,
     onToggleDone: PropTypes.func,
     done: PropTypes.bool,
-    checked: PropTypes.bool,
     edit: PropTypes.bool,
     onEdit: PropTypes.func,
     editForm: PropTypes.func,
   }
 
   state={
-    timer:'stop',
-    timeLeft:0,
-
+    timerStatus:'start',
   }
 
   onChangeTimerStatus = () =>{
-    this.setState(({timer})=>{
-      switch (timer) {
-        case 'stop'||'pause':
-          return { timer:'start'}
+    this.setState(({timerStatus})=>{
+      switch (timerStatus) {
+        case ('stop'):
+          return { timerStatus:'start'}
+        case ('pause'):
+            return { timerStatus:'start'}
         case 'start':
-          return { timer:'pause'}
+          return { timerStatus:'pause'}
         default: 
           return null
           
@@ -53,9 +52,7 @@ export default class Task extends React.Component {
   //   this.setState((state)=>({timer: !state.timer}))
   // }
 
-  onSaveTime =(time)=>{
-    this.setState({timeLeft:time})
-  }
+
 
   render() {
     const {
@@ -64,13 +61,12 @@ export default class Task extends React.Component {
       onDestroyed,
       onToggleDone,
       done,
-      checked,
       edit,
       onEdit,
       editForm,
     } = this.props
 
-    const {timer,timeLeft}=this.state
+    const {timerStatus}=this.state
 
     const daysBetween = formatDistanceToNow(date)
 
@@ -85,43 +81,27 @@ export default class Task extends React.Component {
     }
 
     const timerActivateClass =()=>{ 
-      switch (timer) {
-        case 'start': 'timer-start'
-        break
-        case 'stop':  'timer-pause'
-        break
-        case 'pause': 'timer-pause'
-        break
-        
-        default:
-          'timer-pause'
-          break;
-      }
+      switch (timerStatus) {
+        case 'start': 
+          return 'timer-start'
+        case 'stop':  
+          return 'timer-pause'
+        case 'pause':
+          return 'timer-pause'
+         default:
+          return 'timer-pause'
+             }
     }
-   
-    
-
-
-      
+            
   const  startStop =()=>{
-
-    switch (timer) {
-      case 'start':
-        <Timer 
-      className='timer-wrapper'
-      timeLeft={timeLeft}
-      />
-        break;
-    case 'stop':
-      null
-      break;
-      case 'pause':
-       <p>{timeLeft}</p> 
-      break
-      
-      default:
-        break;
-    }
+    if (timerStatus==='stop'){
+      return null
+    } if (timerStatus==='start'||timerStatus==='pause')
+    {return <Timer
+    timerStatus={timerStatus}
+    />
+  }
+  return null
     }
       
       
@@ -130,13 +110,14 @@ export default class Task extends React.Component {
     return (
       <li className={classNames()}>
         <div className="view">
-          <input
+
+          <input   // label
             className="toggle"
             type="checkbox"
-            checked={checked}
+            checked={done}
             onChange={onToggleDone}
           />
-         
+                     {/* ======================Timer================= */}
           <label>
             <button 
             type="button" 
@@ -144,14 +125,18 @@ export default class Task extends React.Component {
             onClick={this.onChangeTimerStatus}
              >{' '}
             </button>
+
+
             <button 
             type="button" 
             className='timer-stop'
              onClick={this.onChangeTimer}
              >{' '}
             </button>
-        
-             {startStop()}
+              <span >{startStop()}</span>
+             
+            {/* ======================Timer================= */}
+
             <span
               className="description"
               onClick={onToggleDone}
@@ -182,7 +167,7 @@ export default class Task extends React.Component {
             {' '}
           </button>
         </div>
-        {edit && <EditItem editForm={editForm} label={label} />}
+        {edit && <NewTaskForm editForm={editForm} label={label} />}
       </li>
     )
   }

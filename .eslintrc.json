@@ -28,11 +28,9 @@
     "react/jsx-props-no-spreading": ["off"],
     "react/static-property-placement": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-    "react/destructuring-assignment": [
-      2,
-      "always",
-      { "ignoreClassFields": true }
-    ]
+    "react/destructuring-assignment": [2,"always", { "ignoreClassFields": true } ],
+    "import/prefer-default-export": "off"
+    // "eslint no-restricted-exports": ["warn", { "restrictedNamedExports": ["default", "Task"] }]
   },
   "settings": {
     "react": {

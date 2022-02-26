@@ -1,3 +1,2 @@
-import Tasklist from './TaskList'
 
-export default Tasklist
+export {default as Tasklist} from './TaskList'

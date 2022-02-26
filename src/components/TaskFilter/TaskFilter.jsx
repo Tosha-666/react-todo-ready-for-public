@@ -1,12 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const TaskList = function taskfilter({ filter, activeButtonClass }) {
-  TaskList.propTypes = {
+const TaskFilter = function taskfilter({ filter, activeButtonClass }) {
+  TaskFilter.propTypes = {
     filter: PropTypes.func,
     activeButtonClass: PropTypes.func,
   }
-  TaskList.defaultProps = {
+  TaskFilter.defaultProps = {
     filter: () => {},
     activeButtonClass: () => {},
   }
@@ -43,4 +43,4 @@ const TaskList = function taskfilter({ filter, activeButtonClass }) {
   )
 }
 
-export default TaskList
+export default TaskFilter
