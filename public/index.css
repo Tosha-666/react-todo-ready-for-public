@@ -162,22 +162,32 @@ body {
   border-bottom: 1px solid #ededed;
 }
 
+.todo-list li .timer{
+  display: inline-block;
+  font-size: 0.8em;
+  margin: 0.2em 1em;
+}
+
 .todo-list li .timer-stop:before{
 content: '\25FC';
 color: #af5b5e;
 cursor: pointer;
+font-size: 0.7em;
 }
 
 .todo-list li .timer-start:before{
   content: '\25B6';
   color: #af5b5e;
   cursor: pointer;
+  font-size: 0.7em;
 }
 
 .todo-list li .timer-pause:before{
   content: '\2225';
   color: #af5b5e;
   cursor: pointer;
+  font-size: 0.7em;
+
 }
 
 .todo-list li:last-child {

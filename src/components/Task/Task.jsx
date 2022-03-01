@@ -28,25 +28,8 @@ export default class Task extends React.Component {
     editForm: PropTypes.func,
   }
 
-  state={
-    timerStatus:'start',
-  }
 
-  onChangeTimerStatus = () =>{
-    this.setState(({timerStatus})=>{
-      switch (timerStatus) {
-        case ('stop'):
-          return { timerStatus:'start'}
-        case ('pause'):
-            return { timerStatus:'start'}
-        case 'start':
-          return { timerStatus:'pause'}
-        default: 
-          return null
-          
-      }
-    })
-  }
+
   
   // onChangeTimer = () =>{
   //   this.setState((state)=>({timer: !state.timer}))
@@ -66,8 +49,6 @@ export default class Task extends React.Component {
       editForm,
     } = this.props
 
-    const {timerStatus}=this.state
-
     const daysBetween = formatDistanceToNow(date)
 
     const classNames = () => {
@@ -80,29 +61,7 @@ export default class Task extends React.Component {
       return ''
     }
 
-    const timerActivateClass =()=>{ 
-      switch (timerStatus) {
-        case 'start': 
-          return 'timer-start'
-        case 'stop':  
-          return 'timer-pause'
-        case 'pause':
-          return 'timer-pause'
-         default:
-          return 'timer-pause'
-             }
-    }
-            
-  const  startStop =()=>{
-    if (timerStatus==='stop'){
-      return null
-    } if (timerStatus==='start'||timerStatus==='pause')
-    {return <Timer
-    timerStatus={timerStatus}
-    />
-  }
-  return null
-    }
+
       
       
     
@@ -119,7 +78,8 @@ export default class Task extends React.Component {
           />
                      {/* ======================Timer================= */}
           <label>
-            <button 
+            <Timer/>
+            {/* <button 
             type="button" 
             className={timerActivateClass()}
             onClick={this.onChangeTimerStatus}
@@ -133,7 +93,7 @@ export default class Task extends React.Component {
              onClick={this.onChangeTimer}
              >{' '}
             </button>
-              <span >{startStop()}</span>
+              <span >{startStop(timerStatus)}</span> */}
              
             {/* ======================Timer================= */}
 
