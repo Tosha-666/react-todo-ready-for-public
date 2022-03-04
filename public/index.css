@@ -172,21 +172,21 @@ body {
 content: '\25FC';
 color: #af5b5e;
 cursor: pointer;
-font-size: 0.7em;
+font-size: 1em;
 }
 
 .todo-list li .timer-start:before{
   content: '\25B6';
   color: #af5b5e;
   cursor: pointer;
-  font-size: 0.7em;
+  font-size: 1em;
 }
 
 .todo-list li .timer-pause:before{
   content: '\2225';
   color: #af5b5e;
   cursor: pointer;
-  font-size: 0.7em;
+  font-size: 1em;
 
 }
 
