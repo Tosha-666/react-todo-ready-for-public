@@ -21,17 +21,15 @@ return ()=>clearInterval(timer)
 
 return(
   <div className='timer'>
-          {!timerStatus&&time===0&&(<button 
+          {!timerStatus&&(<button 
           type="button" 
           className='timer-start'
-          // className={timerActivateClass()}
           onClick={()=>setTimerStatus(true)}
            >{' '}
           </button>)}
          {timerStatus&&(<button 
         type="button" 
         className='timer-pause'
-        // className={timerActivateClass()}
         onClick={()=>setTimerStatus(false)}
           >{' '}
         </button>)}

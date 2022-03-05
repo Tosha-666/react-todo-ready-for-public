@@ -165,10 +165,12 @@ body {
 .todo-list li .timer{
   display: inline-block;
   font-size: 0.8em;
-  margin: 0.2em 1em;
+  margin: 0.2em;
 }
 
 .todo-list li .timer-stop:before{
+  position: relative;
+display: inline-block;
 content: '\25FC';
 color: #af5b5e;
 cursor: pointer;
@@ -176,6 +178,8 @@ font-size: 1em;
 }
 
 .todo-list li .timer-start:before{
+  position: relative;
+  display: inline-block;
   content: '\25B6';
   color: #af5b5e;
   cursor: pointer;
@@ -183,6 +187,8 @@ font-size: 1em;
 }
 
 .todo-list li .timer-pause:before{
+  position: relative;
+  display: inline-block;
   content: '\2225';
   color: #af5b5e;
   cursor: pointer;
