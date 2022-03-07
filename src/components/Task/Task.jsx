@@ -78,33 +78,18 @@ export default class Task extends React.Component {
           />
                      {/* ======================Timer================= */}
           <label>
-            <Timer/>
-            {/* <button 
-            type="button" 
-            className={timerActivateClass()}
-            onClick={this.onChangeTimerStatus}
-             >{' '}
-            </button>
-
-
-            <button 
-            type="button" 
-            className='timer-stop'
-             onClick={this.onChangeTimer}
-             >{' '}
-            </button>
-              <span >{startStop(timerStatus)}</span> */}
-             
-            {/* ======================Timer================= */}
-
-            <span
+            <span 
+            className='title'
+            onClick={onToggleDone}
+            onKeyDown={onToggleDone}
+            role="button"
+            tabIndex={0}
+            >{label}</span>
+            
+              <span
               className="description"
-              onClick={onToggleDone}
-              onKeyDown={onToggleDone}
-              role="button"
-              tabIndex={0}
             >
-              {label}
+              <Timer/>
             </span>
             <span className="created">created {daysBetween} ago</span>
           </label>

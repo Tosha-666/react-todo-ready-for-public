@@ -22,13 +22,14 @@ export default class App extends React.Component {
     })
   }
 
-  addItem = (text) => {
+  addItem = (text, time) => {
     const newItem = { 
       label: text,
       id: this.maxId++,
       date: new Date(),
       done: false,
       edit: false,
+      time
     }
 
     this.setState(({ toDoData }) => {

@@ -105,11 +105,50 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.new-todo {
+/* .new-todo {
   padding: 16px 16px 16px 60px;
   border: none;
   background: rgba(0, 0, 0, 0.003);
   box-shadow: inset 0 -2px 1px rgba(0, 0, 0, 0.03);
+} */
+.new-todo-form {
+	display: flex;
+	margin-bottom: 0;
+}
+
+.new-todo,
+.new-todo-form .new-todo-form__timer,
+.edit {
+	position: relative;
+	margin: 0;
+	width: 100%;
+	font-size: 24px;
+	font-family: inherit;
+	font-weight: inherit;
+	line-height: 1.4em;
+	color: inherit;
+	padding: 6px;
+	border: 1px solid #999;
+	box-shadow: inset 0 -1px 5px 0 rgba(0, 0, 0, 0.2);
+	box-sizing: border-box;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.new-todo, .new-todo-form .new-todo-form__timer {
+	padding: 16px 16px 16px 60px;
+	border: none;
+	background: rgba(0, 0, 0, 0.003);
+	box-shadow: inset 0 -2px 1px rgba(0,0,0,0.03);
+}
+
+.new-todo {
+	width: 70%;
+}
+
+.new-todo-form .new-todo-form__timer {
+	width: 15%;
+	padding-left: 9px;
 }
 
 .main {
@@ -168,7 +207,7 @@ body {
   margin: 0.2em;
 }
 
-.todo-list li .timer-stop:before{
+.todo-list li .timer-stop:after{
   position: relative;
 display: inline-block;
 content: '\25FC';
@@ -177,7 +216,8 @@ cursor: pointer;
 font-size: 1em;
 }
 
-.todo-list li .timer-start:before{
+.todo-list li .timer-start:after{
+  left: -15px;
   position: relative;
   display: inline-block;
   content: '\25B6';
@@ -186,7 +226,7 @@ font-size: 1em;
   font-size: 1em;
 }
 
-.todo-list li .timer-pause:before{
+.todo-list li .timer-pause:after{
   position: relative;
   display: inline-block;
   content: '\2225';
@@ -236,10 +276,6 @@ font-size: 1em;
 }
 
 .todo-list li .toggle + label {
-  /*
-		Firefox requires `#` to be escaped - https://bugzilla.mozilla.org/show_bug.cgi?id=922433
-		IE and Edge requires *everything* to be escaped to render, so we do that instead of just the `#` - https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/7157459/
-	*/
   background-image: url('data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2240%22%20height%3D%2240%22%20viewBox%3D%22-10%20-18%20100%20135%22%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%2250%22%20fill%3D%22none%22%20stroke%3D%22%23ededed%22%20stroke-width%3D%223%22/%3E%3C/svg%3E');
   background-repeat: no-repeat;
   background-position: center left;
