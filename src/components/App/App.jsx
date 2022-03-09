@@ -31,7 +31,6 @@ export default class App extends React.Component {
       edit: false,
       time
     }
-
     this.setState(({ toDoData }) => {
       const newArr = [...toDoData, newItem]
       return {
@@ -157,6 +156,7 @@ export default class App extends React.Component {
             onToggleDone={this.onToggleDone}
             onEdit={this.onEdit}
             editForm={this.editForm}
+            time = {this.time}
           />
         </section>
         <Footer

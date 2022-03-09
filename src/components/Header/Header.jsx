@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import PropTypes from 'prop-types'
 
+
 const Header = function Header ({addItem}) {
   Header.defaultProps = {
     addItem: () => {},
@@ -11,25 +12,29 @@ const Header = function Header ({addItem}) {
   }
 
   const [value, setValue] = useState('')
-  const [minutes, setMinutes] = useState('00')
-  const [seconds, setSeconds] = useState('00')
+  const [minutes, setMinutes] = useState('')
+  const [seconds, setSeconds] = useState('')
 
 
   const onSubmiteForm = (e) => {
     e.preventDefault()
-    if (value.trim() !== '') {
-      addItem(value.trim(),[minutes,seconds])
+        if (value.trim() !== '') {
+      addItem(value.trim(),[Number(minutes), Number(seconds)])
       setValue('')
+      setMinutes('')
+      setSeconds('')
     }
     setValue('')
+    
   }
 
     return (
       <header className="header">
-        
-        <form className="new-todo-form" id='new-todo-form' onSubmit={onSubmiteForm}>
-          <h1>todos</h1>
-          <label htmlFor='new-todo-form'> 
+         <h1>todos</h1>
+        <form className="new-todo-form" id='new-todo-form' onSubmit={event =>onSubmiteForm(event)}>
+         
+  
+   
             <input
               className="new-todo"
               placeholder="Task"
@@ -37,28 +42,35 @@ const Header = function Header ({addItem}) {
               value={value}
               onChange={event => setValue(event.target.value)}
             />
-            </label>
-           <label>
+
+    
              <input
               className="new-todo-form__timer"
               type='number'
               placeholder="Min"
               autoFocus
+              value={minutes}
               min={0}
               max={59}
               onChange={event => setMinutes(event.target.value)}
-            /></label>
-            
-               <input
+            />
+  
+              <input
               className="new-todo-form__timer"
               type='number'
               placeholder="Sec"
               autoFocus
+              value={seconds}
               min={0}
               max={59}
               onChange={event => setSeconds(event.target.value)}
             />
-
+   
+   <input 
+   type="submit" 
+   value="Submit" 
+   className='submit'
+   />
         </form>
       </header>
     )
