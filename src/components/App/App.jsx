@@ -1,7 +1,7 @@
 import React from 'react'
-import {Header} from '../Header'
-import {Footer} from '../Footer'
-import {Tasklist} from '../TaskList'
+import { Header } from '../Header'
+import { Footer } from '../Footer'
+import { Tasklist } from '../TaskList'
 
 export default class App extends React.Component {
   maxId = 100
@@ -23,13 +23,13 @@ export default class App extends React.Component {
   }
 
   addItem = (text, time) => {
-    const newItem = { 
+    const newItem = {
       label: text,
       id: this.maxId++,
       date: new Date(),
       done: false,
       edit: false,
-      time
+      time,
     }
     this.setState(({ toDoData }) => {
       const newArr = [...toDoData, newItem]
@@ -120,9 +120,8 @@ export default class App extends React.Component {
     this.setState({ filter })
   }
 
-
-  
-  getFilteredItems = (item) => {  // !!!!!!!!!!!!
+  getFilteredItems = (item) => {
+    // !!!!!!!!!!!!
     switch (this.state.filter) {
       case 'all':
         return true
@@ -143,20 +142,19 @@ export default class App extends React.Component {
   }
 
   render() {
-    const {toDoData}=this.state
-    const elseToDo =
-      toDoData.length - toDoData.filter((el) => el.done).length
+    const { toDoData } = this.state
+    const elseToDo = toDoData.length - toDoData.filter((el) => el.done).length
     return (
       <section className="todoapp">
         <Header addItem={this.addItem} />
         <section className="main">
           <Tasklist
-            toDoItem={toDoData.filter(this.getFilteredItems)}  // 
+            toDoItem={toDoData.filter(this.getFilteredItems)} //
             onDestroyed={this.deleteItem}
             onToggleDone={this.onToggleDone}
             onEdit={this.onEdit}
             editForm={this.editForm}
-            time = {this.time}
+            time={this.time}
           />
         </section>
         <Footer

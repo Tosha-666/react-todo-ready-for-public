@@ -1,2 +1,1 @@
-
-export {default as NewTaskForm} from './NewTaskForm'
+export { default as NewTaskForm } from './NewTaskForm'

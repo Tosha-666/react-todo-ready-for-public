@@ -1,2 +1,1 @@
-
-export {default as TaskFilter} from './TaskFilter'
+export { default as TaskFilter } from './TaskFilter'

@@ -1,2 +1,1 @@
-
-export {default as Tasklist} from './TaskList'
+export { default as Tasklist } from './TaskList'
