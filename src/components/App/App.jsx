@@ -1,169 +1,161 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { Header } from '../Header'
 import { Footer } from '../Footer'
 import { Tasklist } from '../TaskList'
 
-export default class App extends React.Component {
-  maxId = 100
 
-  state = {
-    toDoData: [],
-    filter: 'all',
-  }
+const App=function App(){
+let maxId=100
+const [toDoData, setToDoData]=useState([])
+const [filter, setFilter]=useState('all')
 
-  deleteItem = (id) => {
-    this.setState(({ toDoData }) => {
-      const delId = toDoData.findIndex((el) => el.id === id)
-      const newArray = [
-        ...toDoData.slice(0, delId),
-        ...toDoData.slice(delId + 1),
+const deleteItem = (id) => {
+  setToDoData((data)=>
+   {
+     const delId = data.findIndex((el) => el.id === id)
+     const newArray = [
+        ...data.slice(0, delId),
+        ...data.slice(delId + 1),
       ]
-      return { toDoData: newArray }
-    })
+      return newArray
+  })
   }
 
-  addItem = (text, time) => {
+  const addItem = (text, time) => {
     const newItem = {
       label: text,
-      id: this.maxId++,
+      id: maxId++,
       date: new Date(),
       done: false,
       edit: false,
       time,
     }
-    this.setState(({ toDoData }) => {
-      const newArr = [...toDoData, newItem]
+    setToDoData((data)=>{
+       const newArr = [...data, newItem]
       return {
-        toDoData: newArr,
+        newArr
       }
     })
   }
 
-  editForm = (text) => {
-    if (text.trim() !== '') {
-      this.setState(({ toDoData }) => {
-        const editId = toDoData.findIndex((el) => el.edit)
-        let newEditId = toDoData[editId]
-
-        newEditId = { ...newEditId, label: text.trim(), edit: false }
-        const newArr = [
-          ...toDoData.slice(0, editId),
-          newEditId,
-          ...toDoData.slice(editId + 1),
-        ]
-        return {
-          toDoData: newArr,
-        }
-      })
+const editForm = (text) => {
+  if (text.trim() !== '') {
+    setToDoData((data)=>{
+      const editId = data.findIndex((el) => el.edit)
+      let newEditId = data[editId]
+      newEditId = { ...newEditId, label: text.trim(), edit: false }
+       const newArr = [
+        ...data.slice(0, editId),
+        newEditId,
+        ...data.slice(editId + 1),
+      ]
+      return newArr
+      
+    })
     } else {
-      this.setState(({ toDoData }) => {
-        const editId = toDoData.findIndex((el) => el.edit)
-        let newEditId = toDoData[editId]
+      setToDoData((data)=> {
+      const editId = data.findIndex((el) => el.edit)
+      let newEditId = data[editId]
 
-        newEditId = { ...newEditId, edit: false }
-        const newArr = [
-          ...toDoData.slice(0, editId),
-          newEditId,
-          ...toDoData.slice(editId + 1),
-        ]
-        return {
-          toDoData: newArr,
-        }
-      })
-    }
-  }
-
-  onEdit = (id) => {
-    this.setState(({ toDoData }) => {
-      const editId = toDoData.findIndex((el) => el.id === id)
-      const oldItem = toDoData[editId]
-      const newItem = { ...oldItem, edit: !oldItem.edit }
+      newEditId = { ...newEditId, edit: false }
       const newArr = [
-        ...toDoData.slice(0, editId),
-        newItem,
-        ...toDoData.slice(editId + 1),
+        ...data.slice(0, editId),
+        newEditId,
+        ...data.slice(editId + 1),
       ]
-      return {
-        toDoData: newArr,
-      }
+      return newArr
+      
     })
-  }
-
-  onToggleDone = (id) => {
-    this.setState(({ toDoData }) => {
-      const doneId = toDoData.findIndex((el) => el.id === id)
-      const oldItem = toDoData[doneId]
-
-      const newItem = {
-        ...oldItem,
-        done: !oldItem.done,
-      }
-      const newArr = [
-        ...toDoData.slice(0, doneId),
-        newItem,
-        ...toDoData.slice(doneId + 1),
-      ]
-
-      return {
-        toDoData: newArr,
-      }
-    })
-  }
-
-  deleteComplited = () => {
-    const { toDoData } = this.state
-    const uncomplitedItems = toDoData.filter((item) => !item.done)
-    this.setState({ toDoData: uncomplitedItems })
-  }
-
-  setFilter = (filter) => {
-    this.setState({ filter })
-  }
-
-  getFilteredItems = (item) => {
-    // !!!!!!!!!!!!
-    switch (this.state.filter) {
-      case 'all':
-        return true
-      case 'complited':
-        return item.done
-      case 'active':
-        return !item.done
-      default:
-        return true
-    }
-  }
-
-  activeButtonClass = (buttonName) => {
-    if (buttonName === this.state.filter) {
-      return 'selected'
-    }
-    return ''
-  }
-
-  render() {
-    const { toDoData } = this.state
-    const elseToDo = toDoData.length - toDoData.filter((el) => el.done).length
-    return (
-      <section className="todoapp">
-        <Header addItem={this.addItem} />
-        <section className="main">
-          <Tasklist
-            toDoItem={toDoData.filter(this.getFilteredItems)} //
-            onDestroyed={this.deleteItem}
-            onToggleDone={this.onToggleDone}
-            onEdit={this.onEdit}
-            editForm={this.editForm}
-            time={this.time}
-          />
-        </section>
-        <Footer
-          elseToDo={elseToDo}
-          deleteComplited={this.deleteComplited}
-          filter={this.setFilter}
-          activeButtonClass={this.activeButtonClass}
-        />
-      </section>
-    )
   }
 }
+
+const onEdit = (id) => {
+  setToDoData((data)=> {
+    const editId = data.findIndex((el) => el.id === id)
+    const oldItem = data[editId]
+    const newItem = { ...oldItem, edit: !oldItem.edit }
+    const newArr = [
+      ...data.slice(0, editId),
+      newItem,
+      ...data.slice(editId + 1),
+    ]
+    return newArr
+    
+  })
+}
+
+const onToggleDone = (id) => {
+  setToDoData((data)=> {
+    const doneId = data.findIndex((el) => el.id === id)
+    const oldItem = data[doneId]
+
+    const newItem = {
+      ...oldItem,
+      done: !oldItem.done,
+    }
+    const newArr = [
+      ...data.slice(0, doneId),
+      newItem,
+      ...data.slice(doneId + 1),
+    ]
+    return newArr
+    
+  })
+}
+
+const deleteComplited = () => {
+  const uncomplitedItems = toDoData.filter((item) => !item.done)
+  setToDoData(uncomplitedItems)
+}
+
+const setFiltered = (filt) => {
+  setFilter( filt )
+}
+
+const getFilteredItems = (item) => {
+  switch (filter) {
+    case 'all':
+      return true
+    case 'complited':
+      return item.done
+    case 'active':
+      return !item.done
+    default:
+      return true
+  }
+}
+
+const activeButtonClass = (buttonName) => {
+  if (buttonName === filter) {
+    return 'selected'
+  }
+  return ''
+}
+
+const elseToDo = toDoData.length - toDoData.filter((el) => el.done).length
+
+return (
+  <section className="todoapp">
+    <Header addItem={addItem} />
+    <section className="main">
+      <Tasklist
+        toDoItem={toDoData.filter(getFilteredItems)} //
+        onDestroyed={deleteItem}
+        onToggleDone={onToggleDone}
+        onEdit={onEdit}
+        editForm={editForm}
+
+      />
+    </section>
+    <Footer
+      elseToDo={elseToDo}
+      deleteComplited={deleteComplited}
+      filter={setFiltered}
+      activeButtonClass={activeButtonClass}
+    />
+  </section>
+)
+
+}
+
+export default App
