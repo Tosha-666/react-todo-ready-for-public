@@ -5,7 +5,8 @@ import { Tasklist } from '../TaskList'
 
 
 const App=function App(){
-let maxId=100
+
+const [maxId, setMaxId]=useState(100)
 const [toDoData, setToDoData]=useState([])
 const [filter, setFilter]=useState('all')
 
@@ -22,9 +23,10 @@ const deleteItem = (id) => {
   }
 
   const addItem = (text, time) => {
+    setMaxId(id=>id+1)
     const newItem = {
       label: text,
-      id: maxId++,
+      id:maxId,
       date: new Date(),
       done: false,
       edit: false,
@@ -32,9 +34,8 @@ const deleteItem = (id) => {
     }
     setToDoData((data)=>{
        const newArr = [...data, newItem]
-      return {
-        newArr
-      }
+      return [...newArr]
+      
     })
   }
 
@@ -132,7 +133,7 @@ const activeButtonClass = (buttonName) => {
   return ''
 }
 
-const elseToDo = toDoData.length - toDoData.filter((el) => el.done).length
+const elseToDo =toDoData.length - toDoData.filter((el) => el.done).length
 
 return (
   <section className="todoapp">
@@ -159,3 +160,4 @@ return (
 }
 
 export default App
+
