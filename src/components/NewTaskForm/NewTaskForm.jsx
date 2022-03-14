@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 
-const NewTaskForm = function NewTaskForm({ editForm, label }) {
+const NewTaskForm = ({ editForm, label })=> {
   NewTaskForm.defaultProps = {
     editForm: () => {},
     label: () => {},

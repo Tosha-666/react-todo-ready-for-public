@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import {NewTaskForm} from '../NewTaskForm'
 import Timer from '../Timer'
 
-const Task = function Task({label, date, onDestroyed, onToggleDone, done, edit, onEdit, editForm, time}){
+const Task = ({label, date, onDestroyed, onToggleDone, done, edit, onEdit, editForm, time})=>{
  
   Task.defaultProps = {
     label: 'Your text',

@@ -4,7 +4,7 @@ import { Footer } from '../Footer'
 import { Tasklist } from '../TaskList'
 
 
-const App=function App(){
+const App=()=>{
 
 const [maxId, setMaxId]=useState(100)
 const [toDoData, setToDoData]=useState([])

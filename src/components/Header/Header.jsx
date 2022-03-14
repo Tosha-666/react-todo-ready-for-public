@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 
-const Header = function Header({ addItem }) {
+const Header = ({ addItem }) => {
   Header.defaultProps = {
     addItem: () => {},
   }
@@ -35,6 +35,8 @@ const Header = function Header({ addItem }) {
       >
         <input
           className="new-todo"
+          type="text"
+          required
           placeholder="Task"
           autoFocus
           value={value}
@@ -43,23 +45,24 @@ const Header = function Header({ addItem }) {
 
         <input
           className="new-todo-form__timer"
-          type="number"
+          type="text"
+          required
           placeholder="Min"
           autoFocus
           value={minutes}
-          min={0}
-          max={59}
+
           onChange={(event) => setMinutes(event.target.value)}
         />
 
         <input
           className="new-todo-form__timer"
-          type="number"
+          type="text"
+          required
           placeholder="Sec"
           autoFocus
           value={seconds}
-          min={0}
-          max={59}
+          // min={0}
+          // max={59}
           onChange={(event) => setSeconds(event.target.value)}
         />
 

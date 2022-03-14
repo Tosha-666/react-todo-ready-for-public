@@ -2,13 +2,13 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { TaskFilter } from '../TaskFilter'
 
-const Footer = function footer({
+const Footer = ({
   elseToDo,
   deleteComplited,
   filter,
   getFilteredItems,
   activeButtonClass,
-}) {
+})=> {
   Footer.propTypes = {
     elseToDo: PropTypes.number,
     deleteComplited: PropTypes.func,
