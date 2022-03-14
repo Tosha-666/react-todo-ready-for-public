@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 const NewTaskForm = ({ editForm, label })=> {
   NewTaskForm.defaultProps = {
     editForm: () => {},
-    label: () => {},
+    label: '',
   }
   NewTaskForm.propTypes = {
     editForm: PropTypes.func,

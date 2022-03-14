@@ -4,7 +4,7 @@ import { Footer } from '../Footer'
 import { Tasklist } from '../TaskList'
 
 
-const App=()=>{
+const App=function App(){
 
 const [maxId, setMaxId]=useState(100)
 const [toDoData, setToDoData]=useState([])
@@ -23,7 +23,10 @@ const deleteItem = (id) => {
   }
 
   const addItem = (text, time) => {
-    setMaxId(id=>id+1)
+    if ((time[1]||time[2]<0)&&(time[1]||time[2]>59)){
+      alert('Введите правильное время')
+    } else {
+       setMaxId(id=>id+1)
     const newItem = {
       label: text,
       id:maxId,
@@ -37,6 +40,8 @@ const deleteItem = (id) => {
       return [...newArr]
       
     })
+  }
+  
   }
 
 const editForm = (text) => {

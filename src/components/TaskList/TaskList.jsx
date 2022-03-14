@@ -2,13 +2,13 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Task } from '../Task'
 
-const Tasklist = ({
+const Tasklist =({
   toDoItem,
   onDestroyed,
   onToggleDone,
   onEdit,
   editForm,
-}) => {
+})=> {
   Tasklist.defaultProps = {
     toDoItem: [],
     onDestroyed: () => {},
@@ -18,7 +18,7 @@ const Tasklist = ({
   }
 
   Tasklist.propTypes = {
-    toDoItem: PropTypes.arrayOf(PropTypes.object),
+    toDoItem: PropTypes.arrayOf(PropTypes.shape),
     onDestroyed: PropTypes.func,
     onEdit: PropTypes.func,
     onToggleDone: PropTypes.func,

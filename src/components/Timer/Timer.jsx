@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 
-const Timer = ({ time }) => {
+const Timer =({ time })=>{
   Timer.defaultProps = {
     time: [],
   }

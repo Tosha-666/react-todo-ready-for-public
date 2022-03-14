@@ -8,7 +8,7 @@ const Footer = ({
   filter,
   getFilteredItems,
   activeButtonClass,
-})=> {
+}) => {
   Footer.propTypes = {
     elseToDo: PropTypes.number,
     deleteComplited: PropTypes.func,

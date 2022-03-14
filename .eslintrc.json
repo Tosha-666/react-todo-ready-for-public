@@ -33,13 +33,14 @@
       "always",
       { "ignoreClassFields": true }
     ],
-    "import/prefer-default-export": "off"
-    // "eslint no-restricted-exports": ["warn", { "restrictedNamedExports": ["default", "Task"] }]
-  },
-  "react/function-component-definition": [2, {
-    "namedComponents": "function-expression",
-    "unnamedComponents": "function-expression"
+    "import/prefer-default-export": "off",
+    "react/function-component-definition": [2,{
+    "namedComponents": ["function-declaration", "function-expression", "arrow-function"],
+    "unnamedComponents": ["function-expression", "arrow-function"]
   }],
+    "no-alert": "off"
+  },
+
 
   "settings": {
     "react": {
