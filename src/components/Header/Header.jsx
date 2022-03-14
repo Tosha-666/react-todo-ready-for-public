@@ -16,13 +16,16 @@ const Header =({ addItem })=> {
 
   const onSubmiteForm = (e) => {
     e.preventDefault()
-    if (value.trim() !== '') {
+    if (value.trim() !== ''&&Number.isNaN(minutes)&&Number.isNaN(seconds)) {
       addItem(value.trim(), [Number(minutes), Number(seconds)])
       setValue('')
       setMinutes('')
       setSeconds('')
     }
     setValue('')
+    setMinutes('')
+    setSeconds('')
+    alert('Введите корректные значения')
   }
 
   return (
