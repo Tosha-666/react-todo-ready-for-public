@@ -23,7 +23,7 @@ const deleteItem = (id) => {
   }
 
   const addItem = (text, time) => {
-    if ((time[1]||time[2]<0)&&(time[1]||time[2]>59)){
+    if (((time[0]||time[1])<0)||((time[0]||time[1])>59)){
       alert('Введите корректные значения')
     } else {
        setMaxId(id=>id+1)
