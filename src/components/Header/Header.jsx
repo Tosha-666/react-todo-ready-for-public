@@ -1,41 +1,60 @@
-import React, { useState } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 
-const Header =({ addItem })=> {
-  Header.defaultProps = {
-    addItem: () => {},
+export default class Header extends React.Component  {
+  static defaultProps = {
+      addItem: () => { },
   }
 
-  Header.propTypes = {
-    addItem: PropTypes.func,
-  }
+  static propTypes = {
+     addItem: PropTypes.func
+ }
 
-  const [value, setValue] = useState('')
-  const [minutes, setMinutes] = useState('')
-  const [seconds, setSeconds] = useState('')
+ addItem = this.props.addItem
 
-  const onSubmiteForm = (e) => {
+ state={
+   value:'',
+   minutes:'',
+   seconds:'',
+ }
+
+
+  onSubmiteForm = (e) => {
     e.preventDefault()
-    if (value.trim() !== ''&&!Number.isNaN(Number(minutes))&&!Number.isNaN(Number(seconds))&&minutes<59&&minutes>0&&seconds<59&&seconds>0) {
-      addItem(value.trim(), [Number(minutes), Number(seconds)])
-      setValue('')
-      setMinutes('')
-      setSeconds('')
+    if (this.state.value.trim() !== ''
+      &&!Number.isNaN(Number(this.state.minutes))
+      &&!Number.isNaN(Number(this.state.seconds))
+      &&this.state.minutes<59
+      &&this.state.minutes>0
+      &&this.state.seconds<59
+      &&this.state.seconds>0) {
+      this.addItem(this.state.value.trim(), [Number(this.state.minutes), Number(this.state.seconds)])
+      this.setState({
+        value:'',
+        minutes:'',
+        seconds:'',
+      })
+
     } else{ 
-    setValue('')
-    setMinutes('')
-    setSeconds('')
+      this.setState({
+        value:'',
+        minutes:'',
+        seconds:'',
+      })
     alert('Введите корректные значения от 0 до 59')}
    
   }
 
-  return (
-    <header className="header">
+
+  render() {
+    const {value, minutes, seconds}=this.state
+
+  return<header className="header">
       <h1>todos</h1>
       <form
         className="new-todo-form"
         id="new-todo-form"
-        onSubmit={(event) => onSubmiteForm(event)}
+        onSubmit={(event) => this.onSubmiteForm(event)}
       >
         <input
           className="new-todo"
@@ -44,7 +63,7 @@ const Header =({ addItem })=> {
           placeholder="Task"
           autoFocus
           value={value}
-          onChange={(event) => setValue(event.target.value)}
+          onChange={(event) => this.setState({value:event.target.value})}
         />
 
         <input
@@ -56,7 +75,7 @@ const Header =({ addItem })=> {
           value={minutes}
           min={0}
           max={59}
-          onChange={(event) => setMinutes(event.target.value)}
+          onChange={(event) => this.setState({minutes:event.target.value})}
         />
 
         <input
@@ -68,13 +87,14 @@ const Header =({ addItem })=> {
           value={seconds}
           min={0}
           max={59}
-          onChange={(event) => setSeconds(event.target.value)}
+          onChange={(event) => this.setState({seconds:event.target.value})}
         />
 
         <input type="submit" value="Submit" className="submit" />
       </form>
     </header>
-  )
+  }
+    
 }
 
-export default Header
+

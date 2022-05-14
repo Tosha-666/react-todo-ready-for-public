@@ -1,168 +1,176 @@
-import React, {useState} from 'react'
+import React from 'react'
 import { Header } from '../Header'
 import { Footer } from '../Footer'
 import { Tasklist } from '../TaskList'
 
 
-const App=function App(){
+export default class App extends React.Component{
 
-const [maxId, setMaxId]=useState(100)
-const [toDoData, setToDoData]=useState([])
-const [filter, setFilter]=useState('all')
+  maxId = 100
 
-const deleteItem = (id) => {
-  setToDoData((data)=>
-   {
-     const delId = data.findIndex((el) => el.id === id)
-     const newArray = [
-        ...data.slice(0, delId),
-        ...data.slice(delId + 1),
-      ]
-      return newArray
-  })
+  state = {
+    toDoData: [],
+    filter:'all'
+}
+
+// const [maxId, setMaxId]=useState(100)
+// const [toDoData, setToDoData]=useState([])
+// const [filter, setFilter]=useState('all')
+
+deleteItem = (id) => {
+  this.setState(({ toDoData })=> {
+    const delId = toDoData.findIndex((el) => el.id === id)
+    const newArray = [...toDoData.slice(0, delId), ...toDoData.slice(delId+1)]
+    return {toDoData: newArray}
+})
   }
 
-  const addItem = (text, time) => {
-    if (((time[0]||time[1])<0)||((time[0]||time[1])>59)){
+addItem = (text, time) => {
+    if (((time[0]||time[1])<0)&&((time[0]||time[1])>59)){
       alert('Введите корректные значения')
     } else {
-       setMaxId(id=>id+1)
+
     const newItem = {
       label: text,
-      id:maxId,
+      id:this.maxId++,
       date: new Date(),
       done: false,
       edit: false,
       time,
     }
-    setToDoData((data)=>{
-       const newArr = [...data, newItem]
-      return [...newArr]
-      
-    })
+    
+    this.setState(({toDoData})=>{
+       const newArr = [...toDoData, newItem]
+      return {
+        toDoData: newArr
+    }
+   })
   }
   
   }
 
-const editForm = (text) => {
+editForm = (text) => {
   if (text.trim() !== '') {
-    setToDoData((data)=>{
-      const editId = data.findIndex((el) => el.edit)
-      let newEditId = data[editId]
-      newEditId = { ...newEditId, label: text.trim(), edit: false }
-       const newArr = [
-        ...data.slice(0, editId),
-        newEditId,
-        ...data.slice(editId + 1),
-      ]
-      return newArr
-      
-    })
-    } else {
-      setToDoData((data)=> {
-      const editId = data.findIndex((el) => el.edit)
-      let newEditId = data[editId]
-
-      newEditId = { ...newEditId, edit: false }
+    this.setState(({ toDoData }) => {
+      const editId = toDoData.findIndex((el) => el.edit)
+      let newEditId = toDoData[editId]
+      newEditId = {...newEditId, label:text.trim(), edit:false}
       const newArr = [
-        ...data.slice(0, editId),
-        newEditId,
-        ...data.slice(editId + 1),
+          ...toDoData.slice(0, editId), newEditId, ...toDoData.slice(editId + 1)
       ]
-      return newArr
-      
+      return {
+          toDoData:newArr
+      }
+  })
+    } else {
+      this.setState(({ toDoData }) => {
+        const editId = toDoData.findIndex((el) => el.edit)
+        let newEditId = toDoData[editId]
+        newEditId = {...newEditId,  edit:false}
+        const newArr = [
+            ...toDoData.slice(0, editId), newEditId, ...toDoData.slice(editId + 1)
+        ]
+        return {
+            toDoData:newArr
+        }
     })
   }
 }
 
-const onEdit = (id) => {
-  setToDoData((data)=> {
-    const editId = data.findIndex((el) => el.id === id)
-    const oldItem = data[editId]
+ onEdit = (id) => {
+  this.setState(({ toDoData }) => {
+    const editId = toDoData.findIndex((el) => el.id === id)
+    const oldItem = toDoData[editId]
     const newItem = { ...oldItem, edit: !oldItem.edit }
     const newArr = [
-      ...data.slice(0, editId),
-      newItem,
-      ...data.slice(editId + 1),
+        ...toDoData.slice(0, editId), newItem, ...toDoData.slice(editId+1)
     ]
-    return newArr
-    
-  })
-}
-
-const onToggleDone = (id) => {
-  setToDoData((data)=> {
-    const doneId = data.findIndex((el) => el.id === id)
-    const oldItem = data[doneId]
-
-    const newItem = {
-      ...oldItem,
-      done: !oldItem.done,
+    return {
+        toDoData:newArr
     }
-    const newArr = [
-      ...data.slice(0, doneId),
-      newItem,
-      ...data.slice(doneId + 1),
-    ]
-    return newArr
+})
+}
+
+ onToggleDone = (id) => {
+  this.setState(({ toDoData }) => {
+    const doneId = toDoData.findIndex((el) => el.id === id)
+    const oldItem = toDoData[doneId]
     
-  })
+    const newItem ={...oldItem, done:!oldItem.done, checked:!oldItem.checked}
+    const newArr = [
+        ...toDoData.slice(0, doneId), newItem, ...toDoData.slice(doneId+1)
+    ]
+
+    return {
+        toDoData:newArr
+    }
+})
 }
 
-const deleteComplited = () => {
-  const uncomplitedItems = toDoData.filter((item) => !item.done)
-  setToDoData(uncomplitedItems)
+ deleteComplited = () => {
+  const {toDoData}=this.state
+  const uncomplitedItems =toDoData.filter((item) => !item.done)
+  this.setState(
+      { toDoData: uncomplitedItems }
+  )
 }
 
-const setFiltered = (filt) => {
-  setFilter( filt )
-}
+setFilter = (filter) => {
+  this.setState({ filter })
+      };
 
-const getFilteredItems = (item) => {
-  switch (filter) {
-    case 'all':
-      return true
-    case 'complited':
-      return item.done
-    case 'active':
-      return !item.done
-    default:
-      return true
+getFilteredItems = (item) => {
+  switch (this.state.filter) {
+      case ('all'):
+          return true
+      case ('complited'):
+          return item.done
+      case ('active'):
+          return !item.done
+      default: 
+          return true
   }
 }
 
-const activeButtonClass = (buttonName) => {
-  if (buttonName === filter) {
-    return 'selected'
-  }
-  return ''
+
+activeButtonClass = (buttonName) => {
+         
+  if (buttonName === this.state.filter) {
+      return 'selected'
+  } 
+     return ''
+  
 }
 
-const elseToDo =toDoData.length - toDoData.filter((el) => el.done).length
 
-return (
-  <section className="todoapp">
-    <Header addItem={addItem} />
-    <section className="main">
+
+ render() {
+    const {toDoData}=this.state
+  const elseToDo = toDoData.length - toDoData.filter((el) => el.done).length
+    return <section className='todoapp'>
+      <Header
+          addItem={this.addItem}/>
+  <section className='main'>
       <Tasklist
-        toDoItem={toDoData.filter(getFilteredItems)} //
-        onDestroyed={deleteItem}
-        onToggleDone={onToggleDone}
-        onEdit={onEdit}
-        editForm={editForm}
-
-      />
-    </section>
-    <Footer
-      elseToDo={elseToDo}
-      deleteComplited={deleteComplited}
-      filter={setFiltered}
-      activeButtonClass={activeButtonClass}
-    />
+          toDoItem={toDoData.filter(this.getFilteredItems)}
+          onDestroyed={this.deleteItem}
+          onToggleDone={this.onToggleDone}
+          onEdit={this.onEdit}
+          editForm = {this.editForm} />
+             
   </section>
-)
+      <Footer
+          elseToDo={elseToDo}
+          deleteComplited={this.deleteComplited}
+          filter={this.setFilter}
+          getFilteredItems={this.getFilteredItems}
+          activeButtonClass={this.activeButtonClass}  />
+  </section>
+  
 
 }
 
-export default App
+}
+
+
 
