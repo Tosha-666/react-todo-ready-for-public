@@ -16,7 +16,7 @@ const Header =({ addItem })=> {
 
   const onSubmiteForm = (e) => {
     e.preventDefault()
-    if (value.trim() !== ''&&!Number.isNaN(minutes)&&!Number.isNaN(seconds)) {
+    if (value.trim() !== ''&&!Number.isNaN(Number(minutes))&&!Number.isNaN(Number(seconds))&&minutes<59&&minutes>0&&seconds<59&&seconds>0) {
       addItem(value.trim(), [Number(minutes), Number(seconds)])
       setValue('')
       setMinutes('')
@@ -25,7 +25,7 @@ const Header =({ addItem })=> {
     setValue('')
     setMinutes('')
     setSeconds('')
-    alert('Введите корректные значения')}
+    alert('Введите корректные значения от 0 до 59')}
    
   }
 
@@ -54,7 +54,8 @@ const Header =({ addItem })=> {
           placeholder="Min"
           autoFocus
           value={minutes}
-
+          min={0}
+          max={59}
           onChange={(event) => setMinutes(event.target.value)}
         />
 
@@ -65,8 +66,8 @@ const Header =({ addItem })=> {
           placeholder="Sec"
           autoFocus
           value={seconds}
-          // min={0}
-          // max={59}
+          min={0}
+          max={59}
           onChange={(event) => setSeconds(event.target.value)}
         />
 
