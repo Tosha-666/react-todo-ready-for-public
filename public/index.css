@@ -241,6 +241,7 @@ body {
 .todo-list li label .description {
   font-size: 13px;
   color: gray;
+  margin-left: 10px;
 }
 
 .todo-list li label .title {
@@ -250,6 +251,7 @@ body {
   transition: color 0.4s;
   font-weight: 400;
   color: #4d4d4d;
+  margin-right: auto;
 }
 
 .todo-list li.completed label .title {

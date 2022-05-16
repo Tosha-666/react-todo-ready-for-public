@@ -8,6 +8,7 @@ const Tasklist =({
   onToggleDone,
   onEdit,
   editForm,
+  onEditEsc,
 })=> {
   Tasklist.defaultProps = {
     toDoItem: [],
@@ -15,6 +16,7 @@ const Tasklist =({
     onEdit: () => {},
     onToggleDone: () => {},
     editForm: () => {},
+    onEditEsc:()=> {}
   }
 
   Tasklist.propTypes = {
@@ -23,6 +25,7 @@ const Tasklist =({
     onEdit: PropTypes.func,
     onToggleDone: PropTypes.func,
     editForm: PropTypes.func,
+    onEditEsc:PropTypes.func,
   }
 
   return (
@@ -38,6 +41,7 @@ const Tasklist =({
           onDestroyed={() => onDestroyed(listEl.id)}
           onToggleDone={() => onToggleDone(listEl.id)}
           onEdit={() => onEdit(listEl.id)}
+          onEditEsc={() => onEditEsc(listEl.id)}
           editForm={editForm}
         />
       ))}

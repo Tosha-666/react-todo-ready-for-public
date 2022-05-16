@@ -1,50 +1,71 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 
-const Timer =({ time })=>{
-  Timer.defaultProps = {
+
+
+export default class Timer extends React.Component{
+  static defaultProps = {
     time: [],
   }
-  Timer.propTypes = {
+
+  static propTypes = {
     time: PropTypes.arrayOf(PropTypes.number),
   }
-  const [timerStatus, setTimerStatus] = useState(false)
-  const [timeleft, setTimeLeft] = useState(time)
 
-  useEffect(() => {
-    let timer = null
-    if (timerStatus) {
-      timer = setInterval(() => {
-        setTimeLeft((prevtime) => {
-          if (prevtime[1] <= 59 && prevtime[1] > 0) {
-            const seconds = prevtime[1] - 1
-            return [prevtime[0], seconds]
+  time =this.props.time
+
+  state={
+    timeleft:this.time,
+    timer:null
+  }
+
+  componentWillUnmount(){
+    const {timer}=this.state
+    clearInterval(timer)
+  }
+  
+  
+
+startTimer=()=>{
+  clearInterval(this.state.timer)
+      let min=this.state.timeleft[0]
+      let seconds=this.state.timeleft[1]
+  const timer=setInterval(()=>{
+
+            const {timeleft}=this.state
+
+            if (timeleft[1] <= 59 &&timeleft[1] > 0) {
+             seconds = this.state.timeleft[1] - 1
+              this.setState({timeleft:[timeleft[0],seconds]})
           }
-          if (prevtime[1] === 0 && prevtime[0] > 0) {
-            const min = prevtime[0] - 1
-            const seconds = 59
-            return [min, seconds]
+          if (timeleft[1] === 0 && timeleft[0] > 0) {
+             min = timeleft[0] - 1
+             seconds = 59
+             this.setState({timeleft:[min,seconds]})
           }
-          if (prevtime[0] === 0 && prevtime[1] === 0) {
+          if (timeleft[0] === 0 && timeleft[1] === 0) {
             clearInterval(timer)
-            return [0, 0]
+            min = 0
+            seconds = 0
+            this.setState({timeleft:[0,0]})
           }
-          return [prevtime[0], prevtime[1]]
-        })
-      }, 1000)
-    } else {
-      clearInterval(timer)
-    }
+            return [0,0]
+        },1000)
+        return this.setState({timer})
+}
 
-    return () => clearInterval(timer)
-  }, [timerStatus])
-
-  return (
+stopTimer=()=>{
+  clearInterval(this.state.timer)
+}
+ 
+  render(){
+    const {timeleft}=this.state
+    return (
     <span className="description">
       <button
         type="button"
         className="icon icon-play"
-        onClick={() => setTimerStatus(true)}
+        onClick={() => this.startTimer()}
       >
         {' '}
       </button>
@@ -52,7 +73,7 @@ const Timer =({ time })=>{
       <button
         type="button"
         className="icon icon-pause"
-        onClick={() => setTimerStatus(false)}
+        onClick={() => this.stopTimer()}
       >
         {' '}
       </button>
@@ -62,8 +83,9 @@ const Timer =({ time })=>{
       </span>
 
     </span>
-  )
+  )}
+  
 }
 
-export default Timer
+// export default Timer
 

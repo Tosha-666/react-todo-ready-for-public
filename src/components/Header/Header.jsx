@@ -36,11 +36,7 @@ export default class Header extends React.Component  {
       })
 
     } else{ 
-      this.setState({
-        value:'',
-        minutes:'',
-        seconds:'',
-      })
+      
     alert('Введите корректные значения от 0 до 59')}
    
   }

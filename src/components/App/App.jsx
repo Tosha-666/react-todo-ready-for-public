@@ -77,6 +77,20 @@ editForm = (text) => {
   }
 }
 
+onEditEsc=()=>{
+  this.setState(({toDoData})=>{
+     const editId = toDoData.findIndex((el) => el.edit)
+     let newEditId = toDoData[editId]
+     newEditId = {...newEditId, edit:false}
+     const newArr = [
+      ...toDoData.slice(0, editId), newEditId, ...toDoData.slice(editId + 1)
+  ]
+  return {
+      toDoData:newArr
+  }
+  })
+}
+
  onEdit = (id) => {
   this.setState(({ toDoData }) => {
     const editId = toDoData.findIndex((el) => el.id === id)
@@ -156,7 +170,9 @@ activeButtonClass = (buttonName) => {
           onDestroyed={this.deleteItem}
           onToggleDone={this.onToggleDone}
           onEdit={this.onEdit}
-          editForm = {this.editForm} />
+          editForm = {this.editForm} 
+          onEditEsc={this.onEditEsc}
+          />
              
   </section>
       <Footer
