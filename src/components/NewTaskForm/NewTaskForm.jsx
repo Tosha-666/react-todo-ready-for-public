@@ -1,14 +1,16 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 
-const NewTaskForm = ({ editForm, label })=> {
+const NewTaskForm = ({ editForm, label, onEditEsc })=> {
   NewTaskForm.defaultProps = {
     editForm: () => {},
     label: '',
+    onEditEsc: () => {},
   }
   NewTaskForm.propTypes = {
     editForm: PropTypes.func,
     label: PropTypes.string,
+    onEditEsc: PropTypes.func,
   }
 
   const [newlabel, setNewLabel] = useState(label)
@@ -21,6 +23,12 @@ const NewTaskForm = ({ editForm, label })=> {
     setNewLabel(e.target.value)
   }
 
+  const escFunction = (event)=>{
+    if(event.keyCode === 27) {
+      onEditEsc()
+    }
+  }
+
   return (
     <form onSubmit={onSubmiteForm}>
       <label>
@@ -29,6 +37,7 @@ const NewTaskForm = ({ editForm, label })=> {
           className="edit"
           value={newlabel}
           onChange={onLabelChange}
+          onKeyDown={(event)=>escFunction(event)}
           autoFocus
         />
       </label>

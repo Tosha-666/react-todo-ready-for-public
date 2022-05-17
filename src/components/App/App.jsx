@@ -23,7 +23,7 @@ const deleteItem = (id) => {
   }
 
   const addItem = (text, time) => {
-    if (((time[0]||time[1])<0)||((time[0]||time[1])>59)){
+    if (((time[0]||time[1])<0)&&((time[0]||time[1])>59)){
       alert('Введите корректные значения')
     } else {
        setMaxId(id=>id+1)
@@ -43,6 +43,16 @@ const deleteItem = (id) => {
   }
   
   }
+
+const onEditEsc=()=>{
+  const editId = toDoData.findIndex((el) => el.edit)
+     let newEditId = toDoData[editId]
+     newEditId = {...newEditId, edit:false}
+     const newArr = [
+      ...toDoData.slice(0, editId), newEditId, ...toDoData.slice(editId + 1)
+  ] 
+  setToDoData(newArr)
+}
 
 const editForm = (text) => {
   if (text.trim() !== '') {
@@ -150,6 +160,7 @@ return (
         onToggleDone={onToggleDone}
         onEdit={onEdit}
         editForm={editForm}
+        onEditEsc={onEditEsc}
 
       />
     </section>

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import {NewTaskForm} from '../NewTaskForm'
 import Timer from '../Timer'
 
-const Task = ({label, date, onDestroyed, onToggleDone, done, edit, onEdit, editForm, time})=> {
+const Task = ({label, date, onDestroyed, onToggleDone, done, edit, onEdit, editForm, time, onEditEsc})=> {
  
   Task.defaultProps = {
     label: 'Your text',
@@ -15,7 +15,8 @@ const Task = ({label, date, onDestroyed, onToggleDone, done, edit, onEdit, editF
     edit: false,
     onEdit: () => {},
     editForm: () => {},
-    time:[0,0]
+    time:[0,0],
+    onEditEsc: () => {},
   }
   Task.propTypes = {
     label: PropTypes.string,
@@ -26,7 +27,8 @@ const Task = ({label, date, onDestroyed, onToggleDone, done, edit, onEdit, editF
     edit: PropTypes.bool,
     onEdit: PropTypes.func,
     editForm: PropTypes.func,
-    time:PropTypes.arrayOf(PropTypes.number)
+    time:PropTypes.arrayOf(PropTypes.number),
+    onEditEsc: PropTypes.func,
   }
   const daysBetween = formatDistanceToNow(date)
 
@@ -83,7 +85,7 @@ const Task = ({label, date, onDestroyed, onToggleDone, done, edit, onEdit, editF
             {' '}
           </button>
         </div>
-        {edit && <NewTaskForm editForm={editForm} label={label} />}
+        {edit && <NewTaskForm editForm={editForm} label={label} onEditEsc={onEditEsc} />}
       </li>
     )
 }
