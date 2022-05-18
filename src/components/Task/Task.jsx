@@ -1,11 +1,21 @@
 import React from 'react'
 import { formatDistanceToNow } from 'date-fns'
 import PropTypes from 'prop-types'
-import {NewTaskForm} from '../NewTaskForm'
+import { NewTaskForm } from '../NewTaskForm'
 import Timer from '../Timer'
 
-const Task = ({label, date, onDestroyed, onToggleDone, done, edit, onEdit, editForm, time, onEditEsc})=> {
- 
+const Task = ({
+  label,
+  date,
+  onDestroyed,
+  onToggleDone,
+  done,
+  edit,
+  onEdit,
+  editForm,
+  time,
+  onEditEsc,
+}) => {
   Task.defaultProps = {
     label: 'Your text',
     date: new Date(),
@@ -15,8 +25,8 @@ const Task = ({label, date, onDestroyed, onToggleDone, done, edit, onEdit, editF
     edit: false,
     onEdit: () => {},
     editForm: () => {},
-    time:[0,0],
-    onEditEsc:()=>{},
+    time: [0, 0],
+    onEditEsc: () => {},
   }
   Task.propTypes = {
     label: PropTypes.string,
@@ -27,66 +37,68 @@ const Task = ({label, date, onDestroyed, onToggleDone, done, edit, onEdit, editF
     edit: PropTypes.bool,
     onEdit: PropTypes.func,
     editForm: PropTypes.func,
-    time:PropTypes.arrayOf(PropTypes.number),
-    onEditEsc:PropTypes.func,
+    time: PropTypes.arrayOf(PropTypes.number),
+    onEditEsc: PropTypes.func,
   }
   const daysBetween = formatDistanceToNow(date)
 
-    const classNames = () => {
-      if (edit) {
-        return 'editing'
-      }
-      if (done) {
-        return 'completed'
-      }
-      return ''
+  const classNames = () => {
+    if (edit) {
+      return 'editing'
     }
+    if (done) {
+      return 'completed'
+    }
+    return ''
+  }
 
-    return (
-      <li className={classNames()}>
-        <div className="view">
-
-          <input   // label
-            className="toggle"
-            type="checkbox"
-            checked={done}
-            onChange={onToggleDone}
-          />
-          <label>
-            <span 
-            className='title'
+  return (
+    <li className={classNames()}>
+      <div className="view">
+        <input
+          className="toggle"
+          type="checkbox"
+          checked={done}
+          onChange={onToggleDone}
+        />
+        <label>
+          <span
+            className="title"
             onClick={onToggleDone}
             onKeyDown={onToggleDone}
             role="button"
             tabIndex={0}
-            >{label}</span>
-                 
-              <Timer
-              time={time}/>
-
-            <span className="description">created {daysBetween} ago</span>
-          </label>
-          <button
-            title="edit"
-            type="button"
-            className="icon icon-edit"
-            onClick={onEdit}
-            onKeyDown={onEdit}
           >
-            {' '}
-          </button>
+            {label}
+          </span>
 
-          <button
-            title="destroy"
-            type="button"
-            className="icon icon-destroy"
-            onClick={onDestroyed}
-          >
-            {' '}
-          </button>
-        </div>
-        {edit && <NewTaskForm editForm={editForm} label={label} onEditEsc={onEditEsc} />}
-      </li>
-    )
+          <Timer time={time} />
+
+          <span className="description">created {daysBetween} ago</span>
+        </label>
+        <button
+          title="edit"
+          type="button"
+          className="icon icon-edit"
+          onClick={onEdit}
+          onKeyDown={onEdit}
+        >
+          {' '}
+        </button>
+
+        <button
+          title="destroy"
+          type="button"
+          className="icon icon-destroy"
+          onClick={onDestroyed}
+        >
+          {' '}
+        </button>
+      </div>
+      {edit && (
+        <NewTaskForm editForm={editForm} label={label} onEditEsc={onEditEsc} />
+      )}
+    </li>
+  )
 }
 export default Task

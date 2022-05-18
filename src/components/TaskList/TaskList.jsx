@@ -2,21 +2,21 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Task } from '../Task'
 
-const Tasklist =({
+const Tasklist = ({
   toDoItem,
   onDestroyed,
   onToggleDone,
   onEdit,
   editForm,
   onEditEsc,
-})=> {
+}) => {
   Tasklist.defaultProps = {
     toDoItem: [],
     onDestroyed: () => {},
     onEdit: () => {},
     onToggleDone: () => {},
     editForm: () => {},
-    onEditEsc:()=> {}
+    onEditEsc: () => {},
   }
 
   Tasklist.propTypes = {
@@ -25,7 +25,7 @@ const Tasklist =({
     onEdit: PropTypes.func,
     onToggleDone: PropTypes.func,
     editForm: PropTypes.func,
-    onEditEsc:PropTypes.func,
+    onEditEsc: PropTypes.func,
   }
 
   return (
