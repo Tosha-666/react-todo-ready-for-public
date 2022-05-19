@@ -56,7 +56,7 @@ export default class Timer extends React.Component {
   render() {
     const { timeleft } = this.state
     return (
-      <span className="description">
+      <span className="description timer-block">
         <button
           type="button"
           className="icon icon-play"

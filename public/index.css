@@ -256,6 +256,7 @@ input::-webkit-inner-spin-button {
   font-weight: 400;
   color: #4d4d4d;
   margin-right: auto;
+  width: 140px;
 }
 
 .todo-list li.completed label .title {
@@ -305,6 +306,11 @@ input::-webkit-inner-spin-button {
   font-size: 18px;
   width: 18px;
   height: 18px;
+}
+
+.timer-block {
+  position: absolute;
+  left: 190px;
 }
 
 .todo-list li .icon-play {
