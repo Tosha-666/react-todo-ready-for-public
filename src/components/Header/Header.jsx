@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 
-const Header =({ addItem })=> {
+const Header = ({ addItem }) => {
   Header.defaultProps = {
     addItem: () => {},
   }
@@ -16,17 +16,21 @@ const Header =({ addItem })=> {
 
   const onSubmiteForm = (e) => {
     e.preventDefault()
-    if (value.trim() !== ''&&!Number.isNaN(Number(minutes))&&!Number.isNaN(Number(seconds))&&minutes<59&&minutes>0&&seconds<59&&seconds>0) {
+    if (
+      value.trim() !== '' &&
+      !Number.isNaN(Number(minutes)) &&
+      !Number.isNaN(Number(seconds))
+    ) {
       addItem(value.trim(), [Number(minutes), Number(seconds)])
       setValue('')
       setMinutes('')
       setSeconds('')
-    } else{ 
-    setValue('')
-    setMinutes('')
-    setSeconds('')
-    alert('Введите корректные значения от 0 до 59')}
-   
+    } else {
+      setValue('')
+      setMinutes('')
+      setSeconds('')
+      alert('Введите корректные значения от 0 до 59')
+    }
   }
 
   return (
@@ -49,7 +53,7 @@ const Header =({ addItem })=> {
 
         <input
           className="new-todo-form__timer"
-          type="text"
+          type="number"
           required
           placeholder="Min"
           autoFocus
@@ -61,7 +65,7 @@ const Header =({ addItem })=> {
 
         <input
           className="new-todo-form__timer"
-          type="text"
+          type="number"
           required
           placeholder="Sec"
           autoFocus

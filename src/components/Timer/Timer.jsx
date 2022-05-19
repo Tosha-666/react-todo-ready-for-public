@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 
-const Timer =({ time })=>{
+const Timer = ({ time }) => {
   Timer.defaultProps = {
     time: [],
   }
@@ -40,7 +40,7 @@ const Timer =({ time })=>{
   }, [timerStatus])
 
   return (
-    <span className="description">
+    <span className="description timer-block">
       <button
         type="button"
         className="icon icon-play"
@@ -60,10 +60,8 @@ const Timer =({ time })=>{
         {`0${timeleft[0].toString()}`.slice(-2)}:
         {`0${timeleft[1].toString()}`.slice(-2)}
       </span>
-
     </span>
   )
 }
 
 export default Timer
-
